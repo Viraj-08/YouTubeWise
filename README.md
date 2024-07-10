@@ -61,3 +61,8 @@ python gradio_launcher.py
 
 This will start the web server and make the application available at `http://localhost:7860` in your browser.
  Note: The port may change, so please check the actual port number when starting the server.
+
+### Screenshots
+![Screenshot](YouTubeWise_Gradio/Screenshots/YouTubeWise-1.png)
+![Screenshot](YouTubeWise_Gradio/Screenshots/YouTubeWise-2.png)
+![Screenshot](YouTubeWise_Gradio/Screenshots/YouTubeWise-3.png)
