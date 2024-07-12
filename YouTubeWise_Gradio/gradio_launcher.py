@@ -9,7 +9,7 @@ def main():
 
         with gradio_block:
             # Add a Markdown title
-            gr.Markdown("""# 📹 YouTubeWise - A YouTube Video Summarizer and Q&A Chatbot 💬
+            gr.Markdown("""# 📹 YouTubeWise - A YouTube Video Summarizer and Q&A Chatbot 💬 
                         ### Instructions:
                             1. Paste the URL of YouTube video in the text box.
                             2. Click on 'Summarize Video' to generate a summary of the video.
