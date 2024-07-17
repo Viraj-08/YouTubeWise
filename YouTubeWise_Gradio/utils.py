@@ -1,4 +1,6 @@
 # Import necessary libraries
+import gradio as gr
+
 from urllib.parse import urlparse, parse_qs
 
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -18,6 +20,9 @@ load_dotenv()
 # Get the OPENROUTER_API_KEY from the .env file
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
+
+api_key = OPENROUTER_API_KEY
+
 # Models from LM Studio :
 # You can uncomment to select model or add your own model. Make sure to comment out the other line.
 # model="MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF",
@@ -27,12 +32,44 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 # You can change model here.
 model = "google/gemma-2-9b-it:free"
 
+# base_url for OpenAI API
+base_url = "https://openrouter.ai/api/v1"
+
 # Client for LM Studio
 # You can uncomment to use LM Studio or add your own tool/service. Make sure to comment out the other line.
 # client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 # Client for OpenRouter
-client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
+client = OpenAI(base_url=base_url, api_key=api_key)
+
+
+def update_configuration(new_base_url: str, new_model: str, new_api_key: str):
+    """
+    Updates the Parameters for the OpenAI API.
+
+    Args:
+        new_base_url (str): The new base URL for the application.
+        new_model (str): The new model to be used by the application.
+        new_api_key (str): The new API key for the application.
+
+    Raises:
+        gr.Error: If there is an error updating the settings.
+    """
+    try:
+        global base_url, model, api_key
+        # Update the settings based on the user's input
+        if new_base_url != "":
+            base_url = new_base_url
+        if new_model != "":
+            model = new_model
+        if new_api_key != "":
+            api_key = new_api_key
+
+        gr.Info("Settings updated successfully!")
+
+    except Exception as e:
+        print(f"Error updating settings: {e}")
+        raise gr.Error(f"Error updating settings: {e}")
 
 
 def get_video_id(video_url: str) -> str:
